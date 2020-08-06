@@ -1,1 +1,0 @@
-# terraform-aws-fsx_windows_file_system

@@ -19,6 +19,6 @@ output "preferred_file_server_ip" {
 }
 
 output "remote_administration_endpoint" {
-  description = For MULTI_AZ_1 deployment types, use this endpoint when performing administrative tasks on the file system using Amazon FSx Remote PowerShell. For SINGLE_AZ_1 deployment types, this is the DNS name of the file system."
+  description = "For MULTI_AZ_1 deployment types, use this endpoint when performing administrative tasks on the file system using Amazon FSx Remote PowerShell. For SINGLE_AZ_1 deployment types, this is the DNS name of the file system."
   value       = aws_fsx_windows_file_system.default.remote_administration_endpoint
 }

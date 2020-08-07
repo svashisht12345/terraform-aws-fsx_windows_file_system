@@ -12,13 +12,13 @@ locals {
 
 
 resource "aws_fsx_windows_file_system" "default" {
-  count               = var.create_filesystem ? 1 : 0
+  count               = var.create_filesystem == true ? 1 : 0
   kms_key_id          = var.kms_key_id
 
   storage_type        = var.storage_type
   storage_capacity    = var.storage_capacity
   throughput_capacity = var.throughput_capacity
-  subnet_ids          = [var.subnet_ids]
+  subnet_ids          = var.subnet_ids
   preferred_subnet_id = var.preferred_subnet_id
 
   automatic_backup_retention_days   = var.automatic_backup_retention_days

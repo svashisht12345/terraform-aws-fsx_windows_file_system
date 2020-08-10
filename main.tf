@@ -31,7 +31,7 @@ resource "aws_fsx_windows_file_system" "default" {
   deployment_type = var.deployment_type
 
   dynamic "self_managed_active_directory" {
-    for_each = var.active_directory_enabled == true ? [] : [var.self_managed_active_directory_config]
+    for_each = var.active_directory_enabled == true ? [] : [local.self_managed_active_directory_config]
 
     content {
       dns_ips                                = lookup(local.self_managed_active_directory_config, "dns_ips", [])

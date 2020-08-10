@@ -8,7 +8,7 @@ variable "kms_key_id" {
   description = "The AWS KMS master key ID used for encryption."
   type        = string
   default     = null
-}
+} 
 
 variable "storage_type" {
   description = "Specifies the storage type, Valid values are SSD and HDD. HDD is supported on SINGLE_AZ_1 and MULTI_AZ_1 Windows file system deployment types. Default value is SSD."

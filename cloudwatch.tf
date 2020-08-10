@@ -5,7 +5,7 @@ locals {
 }
 
 resource "aws_cloudwatch_metric_alarm" "free_space_warning" {
-  alarm_name          = "free_space_warning_15_percent - ${var.fsx_name}"
+  alarm_name          = "free_space_warning_15_percent - ${local.fsx_name}"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "3"
   metric_name         = "FreeStorageCapacity"
@@ -26,7 +26,7 @@ resource "aws_cloudwatch_metric_alarm" "free_space_warning" {
 
 
 resource "aws_cloudwatch_metric_alarm" "free_space_critical" {
-  alarm_name          = "free_space_critical_10_percent - ${var.fsx_name}"
+  alarm_name          = "free_space_critical_10_percent - ${local.fsx_name}"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "3"
   metric_name         = "FreeStorageCapacity"

@@ -56,7 +56,7 @@ variable "daily_automatic_backup_start_time" {
 variable "weekly_maintenance_start_time" {
   description = "The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone."
   type        = string
-  default     = "sun:05:00"
+  default     = "7:05:00"
 }
 
 variable "security_group_ids" {

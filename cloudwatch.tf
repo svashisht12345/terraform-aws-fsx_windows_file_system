@@ -54,13 +54,11 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
   alarm_name          = "${local.fsx_name} - throughput_usage_critical"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "3"
-  metric_name         = "TotalThroughputUsage"
-  namespace           = "AWS/FSx"
+  threshold_metric_id = "e1"
   period              = "120"
-  statistic           = "Average"
   threshold           = local.critical_capacity_threshold
 
-metric_query {
+  metric_query {
     id          = "e1"
     expression  = "m2+m1"
     label       = "Total Throughput"

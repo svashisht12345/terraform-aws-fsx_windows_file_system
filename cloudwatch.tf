@@ -1,10 +1,11 @@
 locals {
     warning_capacity_threshold = var.storage_capacity * 1000000000 * 0.15
     critical_capacity_threshold = var.storage_capacity * 1000000000 * 0.10
+    fsx_name = lookup(var.tags, "Name", "Unkown name")
 }
 
 resource "aws_cloudwatch_metric_alarm" "free_space_warning" {
-  alarm_name          = "free_space_warning_15_percent - " + lookup(var.tags, "Name", "Unkown name")
+  alarm_name          = "free_space_warning_15_percent - ${var.fsx_name}"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "3"
   metric_name         = "FreeStorageCapacity"
@@ -25,7 +26,7 @@ resource "aws_cloudwatch_metric_alarm" "free_space_warning" {
 
 
 resource "aws_cloudwatch_metric_alarm" "free_space_critical" {
-  alarm_name          = "free_space_critical_10_percent - " + lookup(var.tags, "Name", "Unkown name")
+  alarm_name          = "free_space_critical_10_percent - ${var.fsx_name}"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "3"
   metric_name         = "FreeStorageCapacity"

@@ -97,7 +97,7 @@ variable "active_directory_enabled" {
 
 variable "dns_ips" {
   description = "A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the file system or in the private IP version 4 (IPv4) address ranges as specified in RFC 1918."
-  type        = string
+  type        = any
   default     = null
 }
 

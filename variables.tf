@@ -131,6 +131,12 @@ variable "organizational_unit_distinguished_name" {
   default     = null
 }
 
+variable "sns_critical"{
+  description = "SNS topic ARN for critical alerts"
+  type        = string
+  default     = null
+}
+
 variable "sns_warning"{
   description = "SNS topic ARN for warning alerts"
   type        = string

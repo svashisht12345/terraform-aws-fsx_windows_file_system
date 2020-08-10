@@ -1,9 +1,10 @@
 locals {
-    warning_capacity_threshold = var.storage_capacity * 1000000 * 0.15
+    warning_capacity_threshold = var.storage_capacity * 1000000000 * 0.15
+    critical_capacity_threshold = var.storage_capacity * 1000000000 * 0.10
 }
 
 resource "aws_cloudwatch_metric_alarm" "free_space_warning" {
-  alarm_name          = "free_space_warning_15_percent"
+  alarm_name          = "free_space_warning_15_percent - " + lookup(var.tags, "Name", "Unkown name")
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "3"
   metric_name         = "FreeStorageCapacity"
@@ -20,4 +21,25 @@ resource "aws_cloudwatch_metric_alarm" "free_space_warning" {
   alarm_actions     = [var.sns_warning]
   ok_actions        = [var.sns_info]
   insufficient_data_actions = [var.sns_warning]
+}
+
+
+resource "aws_cloudwatch_metric_alarm" "free_space_critical" {
+  alarm_name          = "free_space_critical_10_percent - " + lookup(var.tags, "Name", "Unkown name")
+  comparison_operator = "LessThanThreshold"
+  evaluation_periods  = "3"
+  metric_name         = "FreeStorageCapacity"
+  namespace           = "AWS/FSx"
+  period              = "120"
+  statistic           = "Average"
+  threshold           = local.critical_capacity_threshold
+
+  dimensions = {
+    FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+  }
+
+  alarm_description = "CRITICAL - Less than 10% Free storage available on FSx filesystem"
+  alarm_actions     = [var.sns_critical]
+  ok_actions        = [var.sns_warning]
+  insufficient_data_actions = [var.sns_critical]
 }

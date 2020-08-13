@@ -3,7 +3,7 @@ locals {
     critical_capacity_threshold = var.storage_capacity * 1000000000 * 0.10
 
     
-    critical_throughput_threshold = var.throughput_capacity * 1000000000 * 0.90
+    critical_throughput_threshold = (var.throughput_capacity * 1000000) * 0.90
     fsx_name = lookup(var.tags, "Name", "Unkown name")
 }
 
@@ -63,11 +63,11 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
     return_data = "true"
   }
 
-  metric_query {
+ metric_query {
     id = "m1"
 
     metric {
-      metric_name = "DataWriteBytes"
+      metric_name = "DataReadBytes"
       namespace   = "AWS/FSx"
       period      = "60"
       stat        = "Sum"
@@ -78,12 +78,12 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
       }
     }
   }
-
- metric_query {
+  
+  metric_query {
     id = "m2"
 
     metric {
-      metric_name = "DataReadBytes"
+      metric_name = "DataWriteBytes"
       namespace   = "AWS/FSx"
       period      = "60"
       stat        = "Sum"

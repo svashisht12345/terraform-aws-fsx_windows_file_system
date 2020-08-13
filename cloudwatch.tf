@@ -54,7 +54,6 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
   alarm_name          = "${local.fsx_name} - throughput_usage_critical"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "3"
-  threshold_metric_id = "e1"
   threshold           = local.critical_capacity_threshold
 
   metric_query {

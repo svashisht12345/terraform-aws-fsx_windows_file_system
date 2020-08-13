@@ -6,7 +6,7 @@ locals {
 
     throughput_threshold = var.throughput_capacity * 1000000
 
-    iops_threshold = var.storage_type == "SSD" ? var.storage_capacity * 3000 : var.storage_capacity * 12
+    iops_threshold = var.storage_type == "SSD" ? var.storage_capacity * 3 : var.storage_capacity * 0.012 # 3000iops/TB for SSD or 12iops/TB for HDD
 }
 
 #

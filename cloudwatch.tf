@@ -107,8 +107,8 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_warning" {
 resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
   alarm_name          = "${local.fsx_name} - throughput_usage_critical"
   comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = "20"
-  datapoints_to_alarm = "15"
+  evaluation_periods  = "15"
+  datapoints_to_alarm = "10"
   threshold           = local.throughput_threshold
 
   metric_query {
@@ -224,8 +224,8 @@ resource "aws_cloudwatch_metric_alarm" "iops_warning" {
 resource "aws_cloudwatch_metric_alarm" "iops_critical" {
   alarm_name          = "${local.fsx_name} - iops_critical"
   comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = "20"
-  datapoints_to_alarm = "15"
+  evaluation_periods  = "15"
+  datapoints_to_alarm = "10"
   threshold           = local.iops_threshold
 
   metric_query {

@@ -48,7 +48,7 @@ resource "aws_cloudwatch_metric_alarm" "free_space_critical" {
 
   alarm_description = "CRITICAL - Less than 10% Free storage available on FSx filesystem"
   alarm_actions     = [var.sns_critical]
-  ok_actions        = [var.sns_warning]
+  ok_actions        = [var.sns_info]
   insufficient_data_actions = [var.sns_critical]
 }
 
@@ -150,7 +150,7 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
 
   alarm_description = "CRITICAL - Sustained throughput Usage over specification on FSx filesystem - burst credit will be depleating"
   alarm_actions     = [var.sns_critical]
-  ok_actions        = [var.sns_warning]
+  ok_actions        = [var.sns_info]
   insufficient_data_actions = [var.sns_critical]
 }
 
@@ -282,6 +282,6 @@ resource "aws_cloudwatch_metric_alarm" "iops_critical" {
 
   alarm_description = "CRITICAL - Sustained IOPS Usage over specification on FSx filesystem - burst credit will be depleating"
   alarm_actions     = [var.sns_critical]
-  ok_actions        = [var.sns_warning]
+  ok_actions        = [var.sns_info]
   insufficient_data_actions = [var.sns_critical]
 }

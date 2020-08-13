@@ -71,7 +71,7 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
       namespace   = "AWS/FSx"
       period      = "60"
       stat        = "Sum"
-      unit        = "Bytes/Decond"
+      unit        = "Bytes/Second"
 
       dimensions = {
         FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)

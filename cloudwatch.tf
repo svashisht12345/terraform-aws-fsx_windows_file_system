@@ -65,7 +65,6 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_warning" {
 
  metric_query {
     id = "m1"
-    return_data = "true"
 
     metric {
       metric_name = "DataReadBytes"
@@ -82,7 +81,6 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_warning" {
   
   metric_query {
     id = "m2"
-    return_data = "true"
 
     metric {
       metric_name = "DataWriteBytes"
@@ -120,7 +118,6 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
 
  metric_query {
     id = "m1"
-    return_data = "true"
 
     metric {
       metric_name = "DataReadBytes"
@@ -137,7 +134,6 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
   
   metric_query {
     id = "m2"
-    return_data = "true"
 
     metric {
       metric_name = "DataWriteBytes"

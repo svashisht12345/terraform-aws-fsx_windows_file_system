@@ -58,7 +58,7 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
 
   metric_query {
     id          = "e1"
-    expression  = "m2+m1"
+    expression  = "SUM(METRICS())/PERIOD(m1)"
     label       = "Total Throughput"
     return_data = "true"
   }
@@ -69,9 +69,9 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
     metric {
       metric_name = "DataWriteBytes"
       namespace   = "AWS/FSx"
-      period      = "120"
+      period      = "60"
       stat        = "Sum"
-      unit        = "Average"
+      unit        = "Bytes/Decond"
 
       dimensions = {
         FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
@@ -85,9 +85,9 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
     metric {
       metric_name = "DataReadBytes"
       namespace   = "AWS/FSx"
-      period      = "120"
+      period      = "60"
       stat        = "Sum"
-      unit        = "Average"
+      unit        = "Bytes/Second"
 
       dimensions = {
         FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)

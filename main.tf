@@ -44,4 +44,9 @@ resource "aws_fsx_windows_file_system" "default" {
   }
 
   tags = var.tags
+
+
+  lifecycle { # Required due to no APIs to read security groups so will always moan about imported FSx SGs
+    ignore_changes = [security_group_ids]
+  }
 }

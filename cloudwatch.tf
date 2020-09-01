@@ -4,9 +4,9 @@ locals {
     warning_capacity_threshold = var.storage_capacity * 1000000000 * 0.15
     critical_capacity_threshold = var.storage_capacity * 1000000000 * 0.10
 
-    throughput_threshold = var.throughput_capacity * 1000000
+    throughput_threshold = var.throughput_capacity * 1000000 * 3 # Multiply in order to allow burst usage to take place before raising any alarms
 
-    iops_threshold = var.storage_type == "SSD" ? var.storage_capacity * 3 : var.storage_capacity * 0.012 # 3000iops/TB for SSD or 12iops/TB for HDD
+    iops_threshold = var.storage_type == "SSD" ? var.storage_capacity * 3 : var.storage_capacity * 0.012 * 4 # 3000iops/TB for SSD or 12iops/TB for HDD
 }
 
 #
@@ -160,7 +160,7 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
 resource "aws_cloudwatch_metric_alarm" "iops_warning" {
   alarm_name          = "${local.fsx_name} - iops_warning"
   comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = "3"
+  evaluation_periods  = "10"
   threshold           = local.iops_threshold
 
   metric_query {
@@ -224,8 +224,8 @@ resource "aws_cloudwatch_metric_alarm" "iops_warning" {
 resource "aws_cloudwatch_metric_alarm" "iops_critical" {
   alarm_name          = "${local.fsx_name} - iops_critical"
   comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = "15"
-  datapoints_to_alarm = "10"
+  evaluation_periods  = "30"
+  datapoints_to_alarm = "20"
   threshold           = local.iops_threshold
 
   metric_query {

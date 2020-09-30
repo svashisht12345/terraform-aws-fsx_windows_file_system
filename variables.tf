@@ -148,3 +148,9 @@ variable "sns_info"{
   type        = string
   default     = null
 }
+
+variable "cloudwatch_alarms_enabled" {
+  description = "Controls if FSx is monitored using CloudWatch alarms"
+  type        = bool
+  default     = true
+}

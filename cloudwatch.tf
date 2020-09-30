@@ -13,6 +13,8 @@ locals {
 # Storage Capacity Metrics
 #
 resource "aws_cloudwatch_metric_alarm" "free_space_warning" {
+  count               = var.cloudwatch_alarms_enabled == true ? 1 : 0
+
   alarm_name          = "${local.fsx_name} - free_space_warning_15_percent"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "3"
@@ -33,6 +35,8 @@ resource "aws_cloudwatch_metric_alarm" "free_space_warning" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "free_space_critical" {
+  count               = var.cloudwatch_alarms_enabled == true ? 1 : 0
+
   alarm_name          = "${local.fsx_name} - free_space_critical_10_percent"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "3"
@@ -56,6 +60,8 @@ resource "aws_cloudwatch_metric_alarm" "free_space_critical" {
 # Throughput Metrics
 #
 resource "aws_cloudwatch_metric_alarm" "throughput_usage_warning" {
+  count               = var.cloudwatch_alarms_enabled == true ? 1 : 0
+
   alarm_name          = "${local.fsx_name} - throughput_usage_warning"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "3"
@@ -105,6 +111,8 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_warning" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
+  count               = var.cloudwatch_alarms_enabled == true ? 1 : 0
+
   alarm_name          = "${local.fsx_name} - throughput_usage_critical"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "15"
@@ -158,6 +166,8 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
 # IOPS Metrics
 #
 resource "aws_cloudwatch_metric_alarm" "iops_warning" {
+  count               = var.cloudwatch_alarms_enabled == true ? 1 : 0
+
   alarm_name          = "${local.fsx_name} - iops_warning"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "10"
@@ -222,6 +232,8 @@ resource "aws_cloudwatch_metric_alarm" "iops_warning" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "iops_critical" {
+  count               = var.cloudwatch_alarms_enabled == true ? 1 : 0
+
   alarm_name          = "${local.fsx_name} - iops_critical"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "30"

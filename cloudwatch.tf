@@ -1,8 +1,8 @@
 locals {
     fsx_name = lookup(var.tags, "Name", "Unkown name")
     
-    warning_capacity_threshold = var.storage_capacity * 1000000000 * 0.15
-    critical_capacity_threshold = var.storage_capacity * 1000000000 * 0.10
+    warning_capacity_threshold = var.storage_capacity * 1000000000 * 0.10
+    critical_capacity_threshold = var.storage_capacity * 1000000000 * 0.05
 
     throughput_threshold = var.throughput_capacity * 1000000 * 3 # Multiply in order to allow burst usage to take place before raising any alarms
 
@@ -15,7 +15,7 @@ locals {
 resource "aws_cloudwatch_metric_alarm" "free_space_warning" {
   count               = var.cloudwatch_alarms_enabled == true ? 1 : 0
 
-  alarm_name          = "${local.fsx_name} - free_space_warning_15_percent"
+  alarm_name          = "${local.fsx_name} - free_space_warning_10_percent"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "3"
   metric_name         = "FreeStorageCapacity"
@@ -37,7 +37,7 @@ resource "aws_cloudwatch_metric_alarm" "free_space_warning" {
 resource "aws_cloudwatch_metric_alarm" "free_space_critical" {
   count               = var.cloudwatch_alarms_enabled == true ? 1 : 0
 
-  alarm_name          = "${local.fsx_name} - free_space_critical_10_percent"
+  alarm_name          = "${local.fsx_name} - free_space_critical_5_percent"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "3"
   metric_name         = "FreeStorageCapacity"

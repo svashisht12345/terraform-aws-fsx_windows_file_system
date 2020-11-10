@@ -56,6 +56,28 @@ resource "aws_cloudwatch_metric_alarm" "free_space_critical" {
   insufficient_data_actions = [var.sns_critical]
 }
 
+resource "aws_cloudwatch_metric_alarm" "free_space_immediate_action" {
+  count               = var.cloudwatch_alarms_enabled == true ? 1 : 0
+
+  alarm_name          = "${local.fsx_name} - free_space_critical_100GB - IMMEDIATE ACTION REQUIRED!!"
+  comparison_operator = "LessThanThreshold"
+  evaluation_periods  = "3"
+  metric_name         = "FreeStorageCapacity"
+  namespace           = "AWS/FSx"
+  period              = "120"
+  statistic           = "Average"
+  threshold           = 100000000000
+
+  dimensions = {
+    FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+  }
+
+  alarm_description = "IMMEDIATE ACTION REQUIRED - Less than 100GB Free storage available on FSx filesystem"
+  alarm_actions     = [var.sns_critical]
+  ok_actions        = [var.sns_info]
+  insufficient_data_actions = [var.sns_critical]
+}
+
 #
 # Throughput Metrics
 #

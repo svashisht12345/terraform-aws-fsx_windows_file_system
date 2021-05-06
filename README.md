@@ -58,7 +58,7 @@ module "fsx" {
 Sometimes you need to have a way to create FSx resources conditionally but Terraform does not allow to use `count` inside `module` block, so the solution is to specify argument `create_filesystem`.
 
 ```hcl
-# S3 bucket will not be created
+# FSx will not be created
 module "fsx" {
   source  = "github.com/affinitywaterltd/terraform-aws-fsx_windows_file_system"
 

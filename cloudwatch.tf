@@ -25,7 +25,7 @@ resource "aws_cloudwatch_metric_alarm" "free_space_warning" {
   threshold           = local.warning_capacity_threshold
 
   dimensions = {
-    FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+    FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
   }
 
   alarm_description = "Warning - Less than 15% Free storage available on FSx filesystem"
@@ -47,7 +47,7 @@ resource "aws_cloudwatch_metric_alarm" "free_space_critical" {
   threshold           = local.critical_capacity_threshold
 
   dimensions = {
-    FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+    FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
   }
 
   alarm_description = "CRITICAL - Less than 10% Free storage available on FSx filesystem"
@@ -69,7 +69,7 @@ resource "aws_cloudwatch_metric_alarm" "free_space_immediate_action" {
   threshold           = 100000000000
 
   dimensions = {
-    FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+    FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
   }
 
   alarm_description = "IMMEDIATE ACTION REQUIRED - Less than 100GB Free storage available on FSx filesystem"
@@ -106,7 +106,7 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_warning" {
       stat        = "Sum"
 
       dimensions = {
-        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
       }
     }
   }
@@ -121,7 +121,7 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_warning" {
       stat        = "Sum"
 
       dimensions = {
-        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
       }
     }
   }
@@ -158,7 +158,7 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
       stat        = "Sum"
 
       dimensions = {
-        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
       }
     }
   }
@@ -173,7 +173,7 @@ resource "aws_cloudwatch_metric_alarm" "throughput_usage_critical" {
       stat        = "Sum"
 
       dimensions = {
-        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
       }
     }
   }
@@ -212,7 +212,7 @@ resource "aws_cloudwatch_metric_alarm" "iops_warning" {
       stat        = "Sum"
 
       dimensions = {
-        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
       }
     }
   }
@@ -227,7 +227,7 @@ resource "aws_cloudwatch_metric_alarm" "iops_warning" {
       stat        = "Sum"
 
       dimensions = {
-        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
       }
     }
   }  
@@ -242,7 +242,7 @@ resource "aws_cloudwatch_metric_alarm" "iops_warning" {
       stat        = "Sum"
 
       dimensions = {
-        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
       }
     }
   }
@@ -279,7 +279,7 @@ resource "aws_cloudwatch_metric_alarm" "iops_critical" {
       stat        = "Sum"
 
       dimensions = {
-        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
       }
     }
   }
@@ -294,7 +294,7 @@ resource "aws_cloudwatch_metric_alarm" "iops_critical" {
       stat        = "Sum"
 
       dimensions = {
-        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
       }
     }
   }  
@@ -309,7 +309,7 @@ resource "aws_cloudwatch_metric_alarm" "iops_critical" {
       stat        = "Sum"
 
       dimensions = {
-        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, list("")),0)
+        FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
       }
     }
   }

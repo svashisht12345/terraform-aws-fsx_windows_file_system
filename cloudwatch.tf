@@ -28,7 +28,7 @@ resource "aws_cloudwatch_metric_alarm" "free_space_warning" {
     FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
   }
 
-  alarm_description = "Warning - Less than 15% Free storage available on FSx filesystem"
+  alarm_description = "Warning - Less than 10% Free storage available on FSx filesystem"
   alarm_actions     = [var.sns_warning]
   ok_actions        = [var.sns_info]
   insufficient_data_actions = [var.sns_warning]
@@ -50,7 +50,7 @@ resource "aws_cloudwatch_metric_alarm" "free_space_critical" {
     FileSystemId = element(concat(aws_fsx_windows_file_system.default.*.id, tolist([""])),0)
   }
 
-  alarm_description = "CRITICAL - Less than 10% Free storage available on FSx filesystem"
+  alarm_description = "CRITICAL - Less than 5% Free storage available on FSx filesystem"
   alarm_actions     = [var.sns_critical]
   ok_actions        = [var.sns_info]
   insufficient_data_actions = [var.sns_critical]
